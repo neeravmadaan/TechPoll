@@ -1,0 +1,158 @@
+{% load static %}
+{% if message %}
+    <script>
+        alert("{{message}}");
+    </script>
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="QuickPoll Home">
+    <meta name="keywords" content="Poll,QuickPoll,Login,Signup">
+    <meta name="author" content="QuickPoll">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>QuickPOLL</title>
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div id="lefth">
+            <button type="button">QuickPOLL</button>
+        </div>
+        <div id="righth">
+            {% if flag %}
+                <button type="button" onclick="location.href='{% url 'profile' %}'">Profile</button>
+                <button type="button" onclick="location.href='{% url 'logout' %}'">Logout</button>
+            {% else %}
+                <button type="button" onclick="location.href='{% url 'login' %}'">Login</button>
+                <button type="button" onclick="location.href='{% url 'signup' %}'">Signup</button>
+            {% endif %}
+        </div>
+    </header>
+    <div id='content'>
+        <button type="button" id="act" class="active" onclick="active()">Active Polls</button>
+        <button type="button" id="inact" class="inactive" onclick="inactive()">Inactive Polls</button>
+        <hr>
+        {% for key,value in database.items %}
+            {% if value.stimeu <= curr_time %}
+                {% if value.etimeu > curr_time %}
+                    <form id="{{key}}" action="upddata" method="post" class="activepoll">
+                        {% csrf_token %}
+                        {{value.question}}
+                        <br>
+                        <br>
+                        <div>
+                            <button class="info" type="button">Start Time: {{value.stime}}</button>
+                            <button class="info" type="button">End Time: {{value.etime}}</button>
+                            <button class="info" type="button">Posted By: {{value.uname}}</button>
+                        </div>
+                        <br>
+                        <hr>
+                        {% for x,y in value.items %}
+                            {% if x != 'question' and x != 'tag' and x != 'etime' and x != 'stime' and x != 'uname' and x != 'etimeu' and x != 'stimeu' %}
+                                {% if y|get_type == False %}
+                                    <input type="radio" id="{{key}}" name="{{key}}" value="{{x}}">
+                                    <label for="{{key}}">{{y}}</label>
+                                    <br>    
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        <input type="hidden" id="flag" name="flag" value="{{flag}}"> 
+                        <div>
+                            {% if value.tag == "Public" or flag %}
+                                <button type="button" onclick='result("{{key}}","{{flag}}")'>View Result</button>
+                                <button type="submit">Vote</button>
+                            {% else %}
+                                Log in to view result or vote!
+                            {% endif %}
+                        </div>
+                    </form>
+                    <br class="activepoll">
+                {% else %}
+                    <form id="{{key}}" class="inactivepoll">
+                        {% csrf_token %}
+                        {{value.question}}
+                        <br>
+                        <br>
+                        <div>
+                            <button class="info" type="button">Start Time: {{value.stime}}</button>
+                            <button class="info" type="button">End Time: {{value.etime}}</button>
+                            <button class="info" type="button">Posted By: {{value.uname}}</button>
+                        </div>
+                        <br>
+                        <hr>
+                        {% for x,y in value.items %}
+                            {% if x != 'question' and x != 'tag' and x != 'etime' and x != 'stime' and x != 'uname' and x != 'etimeu' and x != 'stimeu' %}
+                                {% if y|get_type == False %}
+                                    {{y}}:
+                                {% else %}
+                                    {{y}}
+                                    <br>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </form>
+                    <br class="inactivepoll">
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    {{database|json_script:"database"}}
+    <script>
+        const database=JSON.parse(document.getElementById('database').textContent);
+        function result(key,flag){
+            //etime,stime,etimeu,question,tag,uname
+            form=document.getElementById(key);
+            form.innerHTML="";
+            upd_content=` {% csrf_token %}
+                        ${database[key]['question']}
+                        <br>
+                        <br>
+                        <div>
+                            <button class="info" type="button">Start Time: ${database[key]['stime']}</button>
+                            <button class="info" type="button">End Time: ${database[key]['etime']}</button>
+                            <button class="info" type="button">Posted By: ${database[key]['uname']}</button>
+                        </div>
+                        <br>
+                        <hr>`;
+            count=Object.keys(database[key]).length;
+            count=count-7;
+            for(let i=0;i<count/2;++i)
+            {
+                upd_content=upd_content+`${database[key]['o'+(i+1)]}: ${database[key]['o'+(i+1)+'c']} <br>`; 
+            }
+            upd_content=upd_content+`<div> <button onclick=vote("${key}","${flag}")>Back to Voting Section</button> </div>`;
+            form.innerHTML=upd_content;
+        }
+        function vote(key,flag){
+            form=document.getElementById(key);
+            form.innerHTML="";
+            upd_content=` {% csrf_token %}
+                        ${database[key]['question']}
+                        <br>
+                        <br>
+                        <div>
+                        <button class="info" type="button">Start Time: ${database[key]['stime']}</button>
+                        <button class="info" type="button">End Time: ${database[key]['etime']}</button>
+                        <button class="info" type="button">Posted By: ${database[key]['uname']}</button>
+                        </div>
+                        <br>
+                        <hr>`;
+            count=Object.keys(database[key]).length;
+            count=count-7;
+            for(let i=0;i<count/2;++i)
+            {
+                upd_content=upd_content+`<input type="radio" id="${key}" name="${key}" value=${'o'+(i+1)}>
+                                        <label for="${key}">${database[key]['o'+(i+1)]}</label>
+                                        <br>`; 
+            }
+            upd_content=upd_content+`<input type="hidden" id="flag" name="flag" value="${flag}">`;
+            upd_content=upd_content+`<div> <button type="button" onclick=result("${key},"${flag}")>View Result</button>
+                                    <button type="submit">Vote</button> </div>`;
+            form.innerHTML=upd_content;
+        }
+    </script>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
