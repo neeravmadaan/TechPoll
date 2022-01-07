@@ -1,0 +1,114 @@
+body{
+    margin:0;
+    padding:0;
+    border:0;
+    background-color:black;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+}
+::-webkit-scrollbar{
+    display:none;
+}
+header{
+    display:flex;
+    background-color:#ffde59;
+    color:black;
+    font-family:"Times New Roman";
+    padding-top:1.5%;
+    padding-bottom:1.5%;
+}
+#lefth{
+    flex:40%;
+    padding-left:5%;
+}
+#righth{
+    flex:60%;
+    text-align:right;
+    padding-right:5%;
+}
+#righth button{
+    height:40px;
+    width:10vh;
+    border:none;
+    color:white;
+    background-color:black;
+    border-radius:1vh;
+    outline:none;
+    text-align:center;
+}
+#lefth button{
+    height:40px;
+    width:13vh;
+    border:none;
+    color:white;
+    background-color:black;
+    border-radius:1vh;
+    outline:none;
+    text-align:center;
+}
+#righth button:hover{
+    background-color:blue;
+}
+#content{
+    padding-right:5%;
+    padding-left:5%;
+    padding-top:1%;
+    padding-bottom:1%;
+    text-align:center;
+    font-size:2.5vh;
+    color:yellow;
+}
+.active{
+    background-color:#57ffdc;
+}
+#content button{
+    margin-left:2%;
+    margin-right:2%;
+    height:30px;
+    width:15vh;
+    border:none;
+    color:black;
+    border-radius:1vh;
+    outline:none;
+    text-align:center;
+}
+#content hr{
+    border:none;
+    border-top:2px solid #57ffdc;
+}
+.activepoll,.inactivepoll{
+    background-color:#ffde59;
+    color:black;
+    border-radius:1vh;
+    text-align:left;
+    padding:1%;
+}
+.activepoll hr,.inactivepoll hr{
+    border:none;
+    border-top:2px solid black !important;
+}
+.activepoll button,.inactivepoll button{
+    background-color:black;
+    color:white !important;
+}
+.activepoll div,.inactivepoll div{
+    text-align:center;
+}
+.activepoll button:hover{
+    background-color:blue;
+}
+.inactivepoll{
+    display:none;
+}
+.info{
+    margin-left:0% !important;
+    width:245px !important;
+}
+.info:hover{
+    background-color:black !important;
+}
+@media only screen and (max-width:920px){
+    .info{
+        margin:1%;
+    }
+}

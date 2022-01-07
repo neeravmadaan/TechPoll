@@ -1,0 +1,114 @@
+body{
+    margin:0;
+    border:0;
+    padding:0;
+    background-color:black;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+}
+::-webkit-scrollbar{
+    display:none;
+}
+header{
+    display:flex;
+    background-color:#ffde59;
+    color:black;
+    font-family:"Times New Roman";
+    padding-top:1.5%;
+    padding-bottom:1.5%;
+}
+#lefth{
+    flex:40%;
+    padding-left:5%;
+}
+#righth{
+    flex:60%;
+    text-align:right;
+    padding-right:5%;
+}
+#righth button{
+    height:40px;
+    width:10vh;
+    border:none;
+    color:white;
+    background-color:black;
+    border-radius:1vh;
+    outline:none;
+    text-align:center;
+}
+#lefth button{
+    height:40px;
+    width:13vh;
+    border:none;
+    color:white;
+    background-color:black;
+    border-radius:1vh;
+    outline:none;
+    text-align:center;
+}
+#righth button:hover{
+    background-color:blue;
+}
+#lefth button:hover{
+    background-color:blue;
+}
+form{
+    text-align:center;
+    background-color:#ffde59;
+    position:absolute;
+    top:15%;
+    left:36%;
+    right:36%;
+    bottom:10%;
+    margin:auto;
+    border-radius:2.5vh;
+    height:70vh;
+}
+input{
+    outline:none;
+    border-radius:1vh;
+    border:none;
+    height:3vh;
+}
+#signup{
+    width:10vh;
+}
+#signup:hover{
+    background-color:blue;
+    color:white;
+}
+button{
+    outline:none;
+    border-radius:1vh;
+    border:none;
+    height:3vh;
+    width:10vh;
+}
+button:hover{
+    background-color:blue;
+    color:white;
+}
+@media only screen and (max-width:1250px){
+    form{
+        left:28%;
+        right:28%;
+    }
+}
+@media only screen and (max-width:950px){
+    form{
+        left:22%;
+        right:22%;
+    }
+}
+@media only screen and (max-width:650px){
+    form{
+        left:16%;
+        right:16%;
+    }
+}
+@media only screen and (max-width:350px){
+    form{
+        left:8%;
+        right:8%;
+    }
+}

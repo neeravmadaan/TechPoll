@@ -1,0 +1,64 @@
+{% load static %}
+{% if message %}
+<script>
+    alert('{{message}}')
+</script>
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="QuickPoll Signup">
+    <meta name="keywords" content="Poll,QuickPoll,Signup">
+    <meta name="author" content="QuickPoll">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Signup</title>
+    <link href="{% static 'css/signup.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div id="lefth">
+            <button type="button" onclick="location.href='{% url 'index' %}'">QuickPOLL</button>
+        </div>
+        <div id="righth">
+            <button type="button" onclick="location.href='{% url 'login' %}'">Login</button>
+        </div>
+    </header>
+    <form action="postsignup" method="post">
+        {% csrf_token %}
+        <br>
+        <b>Welcome to QuickPOLL!</b>
+        <br>
+        Make account to access private polls!
+        <br>
+        <br>
+        <label for="uname">Username</label>
+        <br> 
+        <input type="text" name="uname" id="uname" required>
+        <br>
+        <br>
+        <label for="email">Email</label> 
+        <br>
+        <input type="email" name="email" id="email" required>
+        <br>
+        <br>
+        <label for="pw">Password</label>
+        <br> 
+        <input type="password" name="pw" id="pw" required>
+        <br>
+        <br>
+        <label for="cpw">Confirm Password</label>
+        <br> 
+        <input type="password" name="cpw" id="cpw" required>
+        <br>
+        <br>
+        <input id="signup" type="submit" value="SignUp">
+        <br>
+        <br>
+        <b>Already Have an account?</b>
+        <br>
+        <br>
+        <button type="button" onclick="location.href='{% url 'login' %}'">Login</button>
+    </form>
+</body>
+</html>

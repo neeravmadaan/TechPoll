@@ -1,0 +1,53 @@
+{% load static %}
+{% if message %}
+    <script>
+        alert('{{message}}')
+    </script>
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="QuickPoll Login">
+    <meta name="keywords" content="Poll,QuickPoll,Login">
+    <meta name="author" content="QuickPoll">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Login</title>
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div id="lefth">
+            <button type="button" onclick="location.href='{% url 'index' %}'">QuickPOLL</button>
+        </div>
+        <div id="righth">
+            <button type="button" onclick="location.href='{% url 'signup' %}'">Signup</button>
+        </div>
+    </header>
+    <form action="postsign" method="post">
+        <br>
+        {% csrf_token %}
+        <h3>Welcome to QuickPOLL!</h3>
+        Login to access private polls!
+        <br>
+        <br>
+        <label for="email">Email</label>
+        <br> 
+        <input type="email" name="email" id="email" required>
+        <br>
+        <br>
+        <label for="password">Password</label>
+        <br> 
+        <input type="password" name="password" id="password" required>
+        <br>
+        <br>
+        <input id="login" type="submit" value="Login">
+        <br>
+        <br>
+        <b>Don't have an account?</b>
+        <br>
+        <br>
+        <button type="button" onclick="location.href='{% url 'signup' %}'">SignUp</button>
+    </form>
+</body>
+</html>

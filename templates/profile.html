@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="QuickPoll Profile">
+    <meta name="keywords" content="Poll,QuickPoll">
+    <meta name="author" content="QuickPoll">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Profile</title>
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div id="lefth">
+            <button type="button">QuickPOLL</button>
+        </div>
+        <div id="righth">
+            <button type="button" onclick="location.href='{% url 'logout' %}'">Logout</button>
+        </div>
+    </header>
+    <div id='content'>
+        <div id="content1">
+            <button type="button" id="act" class="active" onclick="active()">Active Polls</button>
+            <button type="button" id="inact" class="inactive" onclick="inactive()">Inactive Polls</button>
+        </div>
+        <form action="tohome" method="post" id="content2">
+            {% csrf_token %}
+            <button type="button" onclick="location.href='{% url 'poll' %}'">Create Poll</button>
+            <button type="submit">Go to Home</button>
+        </form>
+    </div>
+    <hr>
+    <div id="userpoll">
+        {% for key,value in database.items %}
+            {% if key in user %}
+                {% if value.stimeu <= curr_time %}
+                    {% if value.etimeu > curr_time %}
+                        <form id="{{key}}" action="deletep" method="post" class="activepoll">
+                            {% csrf_token %}
+                            {{value.question}}
+                            <br>
+                            <br>
+                            <div>
+                                <button class="info" type="button">Start Time: {{value.stime}}</button>
+                                <button class="info" type="button">End Time: {{value.etime}}</button>
+                                <button class="info" type="button">Posted By: {{value.uname}}</button>
+                            </div>
+                            <br>
+                            <hr>
+                            {% for x,y in value.items %}
+                                {% if x != 'question' and x != 'tag' and x != 'etime' and x != 'stime' and x != 'uname' and x != 'etimeu' and x != 'stimeu' %}
+                                    {% if y|get_type == False %}
+                                        {{y}}:
+                                    {% else %}
+                                        {{y}}
+                                        <br>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            <div>
+                                <input type="hidden" name="pollid" value="{{key}}">
+                                <button class="deletep" type="submit">Delete Poll</button>
+                            </div>
+                        </form>
+                        <br class="activepoll">
+                    {% else %}
+                        <form id="{{key}}" class="inactivepoll">
+                            {% csrf_token %}
+                            {{value.question}}
+                            <br>
+                            <br>
+                            <div>
+                                <button class="info" type="button">Start Time: {{value.stime}}</button>
+                                <button class="info" type="button">End Time: {{value.etime}}</button>
+                                <button class="info" type="button">Posted By: {{value.uname}}</button>
+                            </div>
+                            <br>
+                            <hr>
+                            {% for x,y in value.items %}
+                                {% if x != 'question' and x != 'tag' and x != 'etime' and x != 'stime' and x != 'uname' and x != 'etimeu' and x != 'stimeu' %}
+                                    {% if y|get_type == False %}
+                                        {{y}}:
+                                    {% else %}
+                                        {{y}}
+                                        <br>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </form>
+                        <br class="inactivepoll">
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    <script src="{% static 'js/profile.js' %}"></script>
+</body>
+</html>

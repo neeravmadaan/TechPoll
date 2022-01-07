@@ -1,0 +1,84 @@
+{% load static %}
+{% if message %}
+<script>
+    alert("{{message}}");
+</script>
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="QuickPoll Poll">
+    <meta name="keywords" content="Poll,QuickPoll">
+    <meta name="author" content="QuickPoll">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Poll</title>
+    <link href="{% static 'css/poll.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div id="lefth">
+            <button type="button">QuickPOLL</button>
+        </div>
+        <div id="righth">
+            <button type="button" onclick="location.href='{% url 'logout' %}'">Logout</button>
+        </div>
+    </header>
+    <form action="tohome" method="post" id="rules">
+        {% csrf_token %}
+        <button type="submit">Go to Home</button>
+        <button type="button" onclick="rules()">Poll Rules</button>
+    </form>
+    <form action="postpoll" method="post" id="form">
+        {% csrf_token %}
+        <div id="mainform">
+            <h3>Create New Poll!</h3>
+            <div>
+                <label for="question">Question</label>
+                <br>
+                <textarea id="question" name="question" required></textarea>
+            </div>
+            <br>
+            <div>
+                Please select the tag:
+                <br>
+                <input type="radio" id="Public" name="tag" value="Public" required>
+                <label for="Public">Public</label>
+                <input type="radio" id="Private" name="tag" value="Private">
+                <label for="Private">Private</label>
+            </div> 
+            <br>
+            <div>
+                <label for="stime">Start Time</label> 
+                <br>
+                <input type="text" name="stime" id="stime" placeholder="YYYY/MM/DD HH:MM:SS" required>
+            </div>
+            <div>
+                <label for="etime">End Time</label>
+                <br>
+                <input type="text" name="etime" id="etime" placeholder="YYYY/MM/DD HH:MM:SS" required>
+            </div>
+            <br>
+            <div>
+                <label for="o1">Option 1</label>
+                <br>
+                <input type="text" name="o1" id="o1" required>
+            </div>
+            <div>
+                <label for="o2">Option 2</label>
+                <br>
+                <input type="text" name="o2" id="o2" required>
+            </div>
+        </div>
+        <br>
+        <button type="button" onclick="add()">+</button>
+        <button type="button" onclick="remove()">-</button>
+        <br>
+        <br>
+        <input id="create" type="submit" value="Create">
+        <br>
+        <br>
+    </form>
+    <script src="{% static 'js/poll.js' %}"></script>
+</body>
+</html>

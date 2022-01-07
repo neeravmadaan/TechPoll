@@ -1,0 +1,169 @@
+body{
+    margin:0;
+    padding:0;
+    border:0;
+    background-color:black;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+}
+::-webkit-scrollbar{
+    display:none;
+}
+header{
+    display:flex;
+    background-color:#ffde59;
+    color:black;
+    font-family:"Times New Roman";
+    padding-top:1.5%;
+    padding-bottom:1.5%;
+}
+#lefth{
+    flex:40%;
+    padding-left:5%;
+}
+#righth{
+    flex:60%;
+    text-align:right;
+    padding-right:5%;
+}
+#righth button{
+    height:40px;
+    width:10vh;
+    border:none;
+    color:white;
+    background-color:black;
+    border-radius:1vh;
+    outline:none;
+    text-align:center;
+}
+#lefth button{
+    height:40px;
+    width:13vh;
+    border:none;
+    color:white;
+    background-color:black;
+    border-radius:1vh;
+    outline:none;
+    text-align:center;
+}
+#righth button:hover{
+    background-color:blue;
+}
+#content{
+    padding-right:5%;
+    padding-left:5%;
+    padding-top:1%;
+    padding-bottom:1%;
+    font-size:2.5vh;
+    color:yellow;
+    display:flex;
+}
+.active{
+    background-color:#57ffdc;
+}
+#content1{
+    flex:50%;
+}
+#content2{
+    flex:50%;
+    text-align:right;
+}
+#content1 button{
+    margin-right:2%;
+    height:30px;
+    width:16vh;
+    border:none;
+    color:black;
+    border-radius:1vh;
+    outline:none;
+    text-align:center;
+}
+#content2 button{
+    margin-right:2%;
+    height:30px;
+    width:16vh;
+    border:none;
+    background-color:#ffde59;
+    color:black;
+    border-radius:1vh;
+    outline:none;
+    text-align:center;
+}
+#content2 button:hover{
+    background-color:blue;
+    color:white;
+}
+hr{
+    margin-right:5%;
+    margin-left:5%;
+    border:none;
+    border-top:2px solid #57ffdc;
+}
+#userpoll{
+    padding-right:5%;
+    padding-left:5%;
+    font-size:2.5vh;
+}
+#userpoll button{
+    margin-left:2%;
+    margin-right:2%;
+    height:30px;
+    width:15vh;
+    border:none;
+    color:black;
+    border-radius:1vh;
+    outline:none;
+    text-align:center;
+}
+#userpoll .activepoll,#userpoll .inactivepoll{
+    background-color:#ffde59;
+    color:black;
+    border-radius:1vh;
+    text-align:left;
+    padding:1%;
+}
+#userpoll .activepoll hr,#userpoll .inactivepoll hr{
+    border:none;
+    border-top:2px solid black !important;
+    margin:0;
+}
+#userpoll .activepoll button,#userpoll .inactivepoll button{
+    background-color:black;
+    color:white !important;
+}
+#userpoll .activepoll div,#userpoll .inactivepoll div{
+    text-align:center;
+}
+#userpoll .inactivepoll{
+    display:none;
+}
+#userpoll .deletep:hover{
+    background-color:blue;
+}
+#userpoll .info{
+    margin-left:0% !important;
+    width:245px !important;
+}
+.info:hover{
+    background-color:black !important;
+}
+@media only screen and (max-width:920px){
+    #userpoll .info{
+        margin:1%;
+    }
+}
+@media only screen and (max-width:600px)
+{
+    #content{
+        display:block;
+    }
+    #content1{
+        text-align:center
+    }
+    #content2{
+        margin-top:1%;
+        text-align:center;
+    }
+}
